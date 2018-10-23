@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends Model
+class Teacher extends User
 {
     public function newQuery( $excludeDeleted = true ) {
         return parent::newQuery( $excludeDeleted )->whereTypeId( 1 );
