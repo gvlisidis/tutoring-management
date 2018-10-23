@@ -6,6 +6,12 @@ use App\Http\Requests\SaveUserRequest;
 
 class UsersController extends Controller {
 
+    public function students() {
+        $students = auth()->user()->students()->paginate(10);
+
+        return view( 'students.index', compact( 'students' ) );
+    }
+
     public function editAccount() {
         return view( 'user.form', [
             'user'   => auth()->user(),

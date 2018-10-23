@@ -28,7 +28,7 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12">
             <div class="form-group {{ $errors->has( 'name' ) ? 'has-error' : '' }}">
                 <label class="control-label" for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ old( 'name', $student->name ) }}"/>
@@ -37,7 +37,9 @@
                 @endif
             </div>
         </div>
-        <div class="col-xs-12 col-md-6">
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
             <div class="form-group {{ $errors->has( 'lastname' ) ? 'has-error' : '' }}">
                 <label class="control-label" for="lastname">Last name</label>
                 <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="{{ old( 'lastname', $student->lastname ) }}"/>
@@ -59,16 +61,24 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-6">
-            <div class="form-group">
-                <label for="password" class="control-label">Password</label>
-                <input id="password" type="password" class="form-control" name="password" {{ !$student->exists ? 'required' : '' }}>
+        <div class="col-xs-12">
+            <div class="form-group {{ $errors->has( 'telephone' ) ? 'has-error' : '' }}">
+                <label class="control-label" for="telephone">Telephone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Telephone" value="{{ old( 'telephone', $student->telephone ) }}"/>
+                @if( $errors->has( 'telephone') )
+                    <label for="telephone" class="control-label">{{ $errors->first( 'telephone' ) }}</label>
+                @endif
             </div>
         </div>
-        <div class="col-xs-12 col-md-6">
-            <div class="form-group">
-                <label for="password-confirm" class="control-label">Confirm Password</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" {{ !$student->exists ? 'required' : '' }}>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group {{ $errors->has( 'address' ) ? 'has-error' : '' }}">
+                <label class="control-label" for="address">Email</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{ old( 'address', $student->address ) }}"/>
+                @if( $errors->has( 'address') )
+                    <label for="address" class="control-label">{{ $errors->first( 'address' ) }}</label>
+                @endif
             </div>
         </div>
     </div>

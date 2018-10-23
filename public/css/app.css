@@ -6718,3 +6718,12 @@ button.close {
         display: none !important
     }
 }
+
+
+/*  ***********CUSTOME CSS************** */
+
+.student-address{
+    white-space: normal !important;
+    max-width: 150px;
+    word-wrap: break-word;
+}

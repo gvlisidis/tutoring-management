@@ -3,7 +3,7 @@
 Auth::routes();
 
 Route::group( [ 'middleware' => 'auth' ], function () {
-    Route::get( '', 'StudentsController@index' )->name( 'students.index' );
+    Route::get( '', 'UsersController@students' )->name( 'students.index' );
 
     Route::group( [ 'prefix' => 'students' ], function () {
         Route::get( '{student}/edit', 'StudentsController@edit' )->name( 'students.edit' );

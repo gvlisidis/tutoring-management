@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SaveUserRequest;
+use App\Http\Requests\SaveStudentRequest;
 use App\Models\Student;
 
 class StudentsController extends Controller {
@@ -20,13 +20,12 @@ class StudentsController extends Controller {
             ] );
     }
 
-    public function store( SaveUserRequest $request, Student $student ) {
+    public function store( SaveStudentRequest $request, Student $student ) {
         $student->create( [
             'name'     => $request->get( 'name' ),
             'lastname' => $request->get( 'lastname' ),
             'email'    => $request->get( 'email' ),
-            'type_id'  => 2,
-            'password' => bcrypt( $request->get( 'password' ) ),
+            'user_id'  => auth()->user()->id,
         ] );
 
         return redirect()->route( 'students.index' )->with( 'success', 'Student created successfully.' );
@@ -39,12 +38,11 @@ class StudentsController extends Controller {
         ] );
     }
 
-    public function update( SaveUserRequest $request, Student $student ) {
+    public function update( SaveStudentRequest $request, Student $student ) {
         $student->update( [
             'name'     => $request->get( 'name' ),
             'lastname' => $request->get( 'lastname' ),
             'email'    => $request->get( 'email' ),
-            'password' => $request->has( 'password' ) ? bcrypt( $request->get( 'password' ) ) : $student->password,
         ] );
 
         return redirect()->route( 'students.index' )->with( 'success', 'Student updated successfully.' );

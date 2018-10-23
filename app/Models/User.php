@@ -13,17 +13,7 @@ class User extends Authenticatable {
 
     protected $hidden = [ 'password', 'remember_token', ];
 
-    public $table = 'users';
-
-    public function isTeacher() {
-        return $this->type_id == 1;
-    }
-
-    public function isStudent() {
-        return $this->type_id == 2;
-    }
-
-    public function type() {
-        return $this->belongsTo( Type::class );
+    public function students() {
+        return $this->hasMany( Student::class );
     }
 }
