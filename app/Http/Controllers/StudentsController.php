@@ -12,6 +12,7 @@ class StudentsController extends Controller {
 
         return view( 'students.index', compact( 'students' ) );
     }
+
     public function create() {
         return view( 'students.form',
             [
@@ -52,5 +53,9 @@ class StudentsController extends Controller {
         $student->delete();
 
         return redirect()->back()->with( 'success', 'Student deleted successfully.' );
+    }
+
+    public function details( Student $student ) {
+        return view( 'students.details', compact( 'student' ) );
     }
 }

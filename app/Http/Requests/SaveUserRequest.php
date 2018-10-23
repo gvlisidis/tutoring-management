@@ -13,6 +13,16 @@ class SaveUserRequest extends FormRequest
      */
     public function authorize()
     {
+        if($this->students)
+        {
+            if($this->user()->isAdmin()) return true;
+
+            return Post::where('id', $this->blog)
+                       ->where('user_id', $this->user()->id)->exists();
+        }
+
+        return true;
+
         return true;
     }
 

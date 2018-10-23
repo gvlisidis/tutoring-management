@@ -1,6 +1,6 @@
 @extends('crud.index')
 
-@section('title', 'Students')
+@section('title', 'My students')
 
 @section('controls')
     <a href="{{ route( 'students.create' ) }}" class="btn btn-success pull-right">Add a new student</a>
@@ -27,7 +27,7 @@
                 <td>{{ $student->telephone }}</td>
                 <td class="student-address">{{ $student->address }}</td>
                 <td class="text-right">
-                    <a href="#" class="btn btn-primary">Details</a>
+                    <a href="{{ route('students.lesson-details', $student) }}" class="btn btn-primary">Details</a>
                     <a href="{{ route( 'students.edit', $student ) }}" class="btn btn-warning">Edit</a>
                     <a href="{{ route( 'students.delete', $student ) }}" class="btn btn-danger">Delete</a>
                 </td>
