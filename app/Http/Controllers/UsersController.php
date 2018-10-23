@@ -22,6 +22,6 @@ class UsersController extends Controller {
             'password' => $request->has( 'password' ) ? bcrypt( $request->get( 'password' ) ) : auth()->user()->password,
         ] );
 
-        return redirect()->route( 'user.index' )->with( 'success', 'Your account has been updated successfully!' );
+        return redirect()->route( 'students.index' )->with( 'success', 'Your account has been updated successfully!' );
     }
 }
