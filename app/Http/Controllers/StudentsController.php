@@ -9,7 +9,7 @@ use App\Models\Student;
 class StudentsController extends Controller {
 
     public function index() {
-        $students = Student::paginate( 10 );
+        $students = auth()->user()->students()->paginate( 10 );
 
         return view( 'students.index', compact( 'students' ) );
     }

@@ -19,8 +19,8 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="#">Students</a></li>
-                <li><a href="#">Courses</a></li>
+                <li><a href="{{ route('students.index') }}">Students</a></li>
+                <li><a href="{{ route('courses.index') }}">Courses</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
