@@ -9,8 +9,6 @@ class Course extends Model {
     protected $guarded = [ 'id', 'created_at', 'updated_at', ];
 
     public function student() {
-        return $this->belongsToMany( Student::class )
-                    ->withPivot( 'date', 'time', 'notes', 'price', 'paid' )
-                    ->withTimestamps();
+        return $this->belongsToMany( Student::class );
     }
 }

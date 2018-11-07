@@ -23,8 +23,8 @@ class StudentsController extends Controller {
             ] );
     }
 
-    public function store( SaveStudentRequest $request, Student $student ) {
-        $student->create( [
+    public function store( SaveStudentRequest $request ) {
+        $student = Student::create( [
             'name'      => $request->get( 'name' ),
             'lastname'  => $request->get( 'lastname' ),
             'telephone' => $request->get( 'telephone' ),
@@ -33,23 +33,45 @@ class StudentsController extends Controller {
             'user_id'   => auth()->user()->id,
         ] );
 
+        $coursesToRegister = request()->get( 'register' );
+        if ( isset( $coursesToRegister ) ) {
+            foreach ( $coursesToRegister as $id => $course ) {
+                $student->courses()->attach( $id );
+            }
+        }
+
         return redirect()->route( 'students.index' )->with( 'success', 'Student created successfully.' );
     }
 
     public function edit( Student $student ) {
         return view( 'students.form', [
-            'student' => $student,
-            'courses' => Course::all(),
-            'method'  => 'update',
+            'student'         => $student,
+            'courses'         => Course::all(),
+            'method'          => 'update',
+            'assignedCourses' => $student->courses->pluck( 'id' )->toArray(),
         ] );
     }
 
     public function update( SaveStudentRequest $request, Student $student ) {
+        $assignedCourses = $student->courses;
+        if ( isset( $assignedCourses ) ) {
+            foreach ( $assignedCourses as $course ) {
+                $student->courses()->detach( $course->id );
+            }
+        }
+
         $student->update( [
             'name'     => $request->get( 'name' ),
             'lastname' => $request->get( 'lastname' ),
             'email'    => $request->get( 'email' ),
         ] );
+
+        $coursesToRegister = request()->get( 'register' );
+        if ( isset( $coursesToRegister ) ) {
+            foreach ( $coursesToRegister as $id => $course ) {
+                $student->courses()->attach( $id );
+            }
+        }
 
         return redirect()->route( 'students.index' )->with( 'success', 'Student updated successfully.' );
     }

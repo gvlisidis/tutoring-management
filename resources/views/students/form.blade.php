@@ -82,13 +82,20 @@
             </div>
         </div>
     </div>
-    <div class="form-group {{ $errors->has( 'courses' ) ? 'has-error' : '' }}">
-        <label class="control-label" for="client_id">Client</label>
-            @foreach($courses as $course)
-                <input type="checkbox" />{{ $course->name }}
-            @endforeach
-        @if( $errors->has( 'client_id' ) )
-            <label for="client_id" class="control-label">{{ $errors->first( 'client_id' ) }}</label>
-        @endif
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group {{ $errors->has( 'courses' ) ? 'has-error' : '' }}">
+                <label class="control-label">Courses</label>
+                @foreach($courses as $course)
+                    <div>
+                        <input type="checkbox" name="register[{{ $course->id }}]" value="{{ $course->id }}" {{ isset($assignedCourses) ? (in_array($course->id, $assignedCourses)? 'checked' : '') : '' }} />
+                        <label>{{ $course->name }}</label>
+                    </div>
+                @endforeach
+                @if( $errors->has( 'client_id' ) )
+                    <label for="client_id" class="control-label">{{ $errors->first( 'client_id' ) }}</label>
+                @endif
+            </div>
+        </div>
     </div>
 @endsection
