@@ -27,7 +27,7 @@
                 <td>{{ $student->telephone }}</td>
                 <td class="student-address">{{ $student->address }}</td>
                 <td class="text-right">
-                    <a href="{{ route('students.lesson-details', $student) }}" class="btn btn-primary">Details</a>
+                    <a href="{{ route('lessons.index', $student) }}" class="btn btn-primary">Lessons</a>
                     <a href="{{ route( 'students.edit', $student ) }}" class="btn btn-warning">Edit</a>
                     <a href="{{ route( 'students.delete', $student ) }}" class="btn btn-danger">Delete</a>
                 </td>

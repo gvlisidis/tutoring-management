@@ -11,8 +11,6 @@ Route::group( [ 'middleware' => 'auth' ], function () {
         Route::get( 'create', 'StudentsController@create' )->name( 'students.create' );
         Route::post( '', 'StudentsController@store' )->name( 'students.store' );
         Route::get( '{student}/delete', 'StudentsController@destroy' )->name( 'students.delete' )->middleware( 'mystudent' );
-
-        Route::get( '{student}/lesson-details', 'StudentsController@details' )->name( 'students.lesson-details' )->middleware( 'mystudent' );
     } );
 
     Route::group( [ 'prefix' => 'my-account' ], function () {
@@ -27,6 +25,15 @@ Route::group( [ 'middleware' => 'auth' ], function () {
         Route::get( 'create', 'CoursesController@create' )->name( 'courses.create' );
         Route::post( '', 'CoursesController@store' )->name( 'courses.store' );
         Route::get( '{course}/delete', 'CoursesController@destroy' )->name( 'courses.delete' )->middleware( 'mycourse' );
+    } );
+
+    Route::group( [ 'prefix' => 'lessons' ], function () {
+        Route::get( '{student}', 'LessonsController@index' )->name( 'lessons.index' );
+        Route::get( '{lesson}/edit', 'LessonsController@edit' )->name( 'lessons.edit' );
+        Route::put( '{lesson}', 'LessonsController@update' )->name( 'lessons.update' );
+        Route::get( '{student}/create', 'LessonsController@create' )->name( 'lessons.create' );
+        Route::post( '', 'LessonsController@store' )->name( 'lessons.store' );
+        Route::get( '{lesson}/delete', 'LessonsController@destroy' )->name( 'lessons.delete' );
     } );
 
 } );

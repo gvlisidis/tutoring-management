@@ -82,7 +82,5 @@ class StudentsController extends Controller {
         return redirect()->back()->with( 'success', 'Student deleted successfully.' );
     }
 
-    public function details( Student $student ) {
-        return view( 'students.details', compact( 'student' ) );
-    }
+
 }

@@ -1,2 +1,0 @@
-{{ $student->name }}
-{{ $student->lastname }}

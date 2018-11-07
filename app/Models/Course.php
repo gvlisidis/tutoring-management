@@ -8,7 +8,7 @@ class Course extends Model {
 
     protected $guarded = [ 'id', 'created_at', 'updated_at', ];
 
-    public function student() {
+    public function students() {
         return $this->belongsToMany( Student::class );
     }
 
