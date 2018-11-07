@@ -23,10 +23,12 @@ class StudentsController extends Controller {
 
     public function store( SaveStudentRequest $request, Student $student ) {
         $student->create( [
-            'name'     => $request->get( 'name' ),
-            'lastname' => $request->get( 'lastname' ),
-            'email'    => $request->get( 'email' ),
-            'user_id'  => auth()->user()->id,
+            'name'      => $request->get( 'name' ),
+            'lastname'  => $request->get( 'lastname' ),
+            'telephone' => $request->get( 'telephone' ),
+            'email'     => $request->get( 'email' ),
+            'address'   => $request->get( 'address' ),
+            'user_id'   => auth()->user()->id,
         ] );
 
         return redirect()->route( 'students.index' )->with( 'success', 'Student created successfully.' );

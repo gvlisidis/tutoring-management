@@ -74,7 +74,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group {{ $errors->has( 'address' ) ? 'has-error' : '' }}">
-                <label class="control-label" for="address">Email</label>
+                <label class="control-label" for="address">Address</label>
                 <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{ old( 'address', $student->address ) }}"/>
                 @if( $errors->has( 'address') )
                     <label for="address" class="control-label">{{ $errors->first( 'address' ) }}</label>
