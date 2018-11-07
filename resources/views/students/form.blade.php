@@ -82,4 +82,13 @@
             </div>
         </div>
     </div>
+    <div class="form-group {{ $errors->has( 'courses' ) ? 'has-error' : '' }}">
+        <label class="control-label" for="client_id">Client</label>
+            @foreach($courses as $course)
+                <input type="checkbox" />{{ $course->name }}
+            @endforeach
+        @if( $errors->has( 'client_id' ) )
+            <label for="client_id" class="control-label">{{ $errors->first( 'client_id' ) }}</label>
+        @endif
+    </div>
 @endsection

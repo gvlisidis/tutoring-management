@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveStudentRequest;
+use App\Models\Course;
 use App\Models\Student;
 
 class StudentsController extends Controller {
@@ -17,6 +18,7 @@ class StudentsController extends Controller {
         return view( 'students.form',
             [
                 'student' => new Student,
+                'courses' => Course::all(),
                 'method'  => 'store',
             ] );
     }
@@ -37,6 +39,7 @@ class StudentsController extends Controller {
     public function edit( Student $student ) {
         return view( 'students.form', [
             'student' => $student,
+            'courses' => Course::all(),
             'method'  => 'update',
         ] );
     }

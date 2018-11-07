@@ -12,7 +12,9 @@ class Student extends Model {
         return $this->belongsTo( User::class );
     }
 
-    public function lessons() {
-        return $this->hasMany( Lesson::class );
+    public function courses() {
+        return $this->belongsToMany( Course::class )
+            ->withPivot('date', 'time', 'notes', 'price', 'paid')
+            ->withTimestamps();
     }
 }

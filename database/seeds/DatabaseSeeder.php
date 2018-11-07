@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder {
 
         Model::unguard();
         $this->call( UsersSeeder::class );
+        $this->call( CoursesSeeder::class );
         $this->call( StudentsSeeder::class );
         Model::reguard();
     }
