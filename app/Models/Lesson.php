@@ -9,6 +9,8 @@ class Lesson extends Model {
 
     protected $guarded = [ 'id', 'created_at', 'updated_at', ];
 
+    protected $dates = [ 'date' ];
+
     public function user() {
         return $this->belongsTo( User::class );
     }
@@ -34,7 +36,7 @@ class Lesson extends Model {
     }
 
     public function setTimeAttribute( $time ) {
-        $this->attributes['date'] = Carbon::createFromFormat( 'h:i', $time );
+        $this->attributes['time'] = Carbon::createFromFormat( 'H:i A', $time );
     }
 
     public function getFormattedTimeAttribute() {
@@ -42,6 +44,21 @@ class Lesson extends Model {
             return '';
         }
 
-        return empty( $this->time ) ? '' : $this->time->format( 'h:i' );
+        return empty( $this->time ) ? '' : substr( $this->time, 0, 5 );
+
     }
+
+    public function setPriceAttribute( $price ) {
+        $this->attributes['price'] = $price * 10;
+    }
+
+    public function getFormattedPriceAttribute() {
+        return number_format( $this->getAttribute( 'price' ) / 10, 1 );
+    }
+
+    public function getFormattedPaidAttribute() {
+        return $this->getAttribute( 'paid' ) == 1 ? 'Yes' : 'No';
+    }
+
+
 }

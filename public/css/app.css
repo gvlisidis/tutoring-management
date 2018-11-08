@@ -6722,7 +6722,7 @@ button.close {
 
 /*  ***********CUSTOME CSS************** */
 
-.student-address{
+.student-address, .notes{
     white-space: normal !important;
     max-width: 150px;
     word-wrap: break-word;

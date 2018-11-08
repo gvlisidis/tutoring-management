@@ -2,37 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveLessonRequest;
 use App\Models\Lesson;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class LessonsController extends Controller {
 
     public function index( Student $student ) {
-        $lessons = $student->lessons()->paginate( 10 );
+        $lessons           = $student->lessons()->paginate( 10 );
+        $lesson            = new Lesson;
+        $registeredCourses = $student->courses;
+        $method            = 'store';
 
-        return view( 'lessons.index', compact( 'student', 'lessons' ) );
+        return view( 'lessons.index', compact( 'student', 'lessons', 'lesson', 'registeredCourses', 'method' ) );
     }
 
-    public function create( Student $student) {
-        return view( 'lessons.form', [
-            'lesson'            => new Lesson,
-            'method'            => 'store',
-            'registeredCourses' => $student->courses,
-        ] );
-    }
+    public function store( SaveLessonRequest $request, Student $student ) {
 
-    public function store( Request $request, Student $student ) {
-
-        $lesson = Lesson::create( [
+        $student->lessons()->create( [
             'course_id'  => $request->get( 'course_id' ),
             'student_id' => $student->id,
             'date'       => $request->get( 'date' ),
             'time'       => $request->get( 'time' ),
             'price'      => $request->get( 'price' ),
             'notes'      => $request->get( 'notes' ),
+            'paid'       => $request->get( 'paid' ),
         ] );
 
-        return redirect()->route( 'lessons.index', compact( 'newLesson', 'registeredCourses', 'lessons', 'student' ) );
+        $lessons           = $student->lessons()->paginate( 10 );
+        $lesson            = new Lesson;
+        $registeredCourses = $student->courses;
+        $method            = 'store';
+
+        return redirect()->route( 'lessons.index', compact( 'student', 'lessons', 'lesson', 'registeredCourses', 'method' ) );
     }
 }

@@ -82,5 +82,4 @@ class StudentsController extends Controller {
         return redirect()->back()->with( 'success', 'Student deleted successfully.' );
     }
 
-
 }

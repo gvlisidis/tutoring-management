@@ -29,11 +29,11 @@ Route::group( [ 'middleware' => 'auth' ], function () {
 
     Route::group( [ 'prefix' => 'lessons' ], function () {
         Route::get( '{student}', 'LessonsController@index' )->name( 'lessons.index' );
-        Route::get( '{lesson}/edit', 'LessonsController@edit' )->name( 'lessons.edit' );
+        Route::get( '{newlesson}/edit', 'LessonsController@edit' )->name( 'lessons.edit' );
         Route::put( '{lesson}', 'LessonsController@update' )->name( 'lessons.update' );
-        Route::get( '{student}/create', 'LessonsController@create' )->name( 'lessons.create' );
-        Route::post( '', 'LessonsController@store' )->name( 'lessons.store' );
-        Route::get( '{lesson}/delete', 'LessonsController@destroy' )->name( 'lessons.delete' );
+       // Route::get( '{student}/create', 'LessonsController@create' )->name( 'lessons.create' );
+        Route::post( '{student}', 'LessonsController@store' )->name( 'lessons.store' );
+        Route::get( '{newlesson}/delete', 'LessonsController@destroy' )->name( 'lessons.delete' );
     } );
 
 } );

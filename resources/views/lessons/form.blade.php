@@ -12,10 +12,10 @@
     @endif
 @endsection
 
-@section( 'controls' )
-    <a href="{{ route( 'lessons.index' ) }}" class="btn btn-default">Cancel</a>
+{{--@section( 'controls' )
+    <a href="{{ route( 'lessons.index', $student ) }}" class="btn btn-default">Cancel</a>
     <input type="submit" value="Save changes" class="btn btn-success"/>
-@endsection
+@endsection--}}
 
 @section('form')
     @if( ! $errors->isEmpty() )
@@ -57,7 +57,7 @@
                 @endif
             </div>
         </div>
-        <div class="col-xs-12 col-md-6">
+        {{--<div class="col-xs-12 col-md-6">
             <div class="form-group {{ $errors->has( 'course_id' ) ? 'has-error' : '' }}">
                 <label class="control-label" for="courseID">Course</label>
                 <select class="form-control select-field" id="courseID" name="course_id">
@@ -69,7 +69,7 @@
                     <label for="courseID" class="control-label">{{ $errors->first( 'course_id' ) }}</label>
                 @endif
             </div>
-        </div>
+        </div>--}}
     </div>
     <div class="row">
         <div class="col-xs-12">

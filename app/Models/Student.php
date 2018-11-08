@@ -19,4 +19,8 @@ class Student extends Model {
     public function lessons() {
         return $this->hasMany( Lesson::class );
     }
+
+    public function totalAmount(){
+        return number_format($this->lessons->sum('price') / 10, 1) ;
+    }
 }
