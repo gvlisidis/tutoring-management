@@ -29,7 +29,7 @@ Route::group( [ 'middleware' => 'auth' ], function () {
 
     Route::group( [ 'prefix' => 'lessons' ], function () {
         Route::get( '{student}', 'LessonsController@index' )->name( 'lessons.index' );
-        Route::get( 'student/{student}/lesson/{newLesson}/edit', 'LessonsController@edit' )->name( 'lessons.edit' );
+        Route::get( 'student/{student}/lesson/{newlesson}/edit', 'LessonsController@edit' )->name( 'lessons.edit' );
         Route::put( 'student/{student}/lesson/{lesson}', 'LessonsController@update' )->name( 'lessons.update' );
        // Route::get( '{student}/create', 'LessonsController@create' )->name( 'lessons.create' );
         Route::post( 'student/{student}', 'LessonsController@store' )->name( 'lessons.store' );

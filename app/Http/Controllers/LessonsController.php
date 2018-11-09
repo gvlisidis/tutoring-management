@@ -10,9 +10,10 @@ use App\Models\Student;
 class LessonsController extends Controller {
 
     public function index( Student $student ) {
+
         $lessons           = $student->lessons()->paginate( 10 );
         $lesson            = new Lesson;
-        $registeredCourses = empty( $student->courses ) ? Course::all() : $student->courses;
+        $registeredCourses = $student->courses->isEmpty() ? Course::all() : $student->courses;
         $method            = 'store';
 
         return view( 'lessons.index', compact( 'student', 'lessons', 'lesson', 'registeredCourses', 'method' ) );
@@ -33,25 +34,24 @@ class LessonsController extends Controller {
 
         $lessons           = $student->lessons()->paginate( 10 );
         $lesson            = new Lesson;
-        $registeredCourses = empty( $student->courses ) ? Course::all() : $student->courses;
+        $registeredCourses = $student->courses->isEmpty() ? Course::all() : $student->courses;
         $method            = 'store';
 
         return redirect()->route( 'lessons.index', compact( 'student', 'lessons', 'lesson', 'registeredCourses', 'method' ) );
     }
 
-    public function edit( Student $student, Lesson $newLesson ) {
+    public function edit( Student $student, Lesson $newlesson ) {
 
         return view( 'lessons.index', [
             'student'           => $student,
             'lessons'           => $student->lessons()->paginate( 10 ),
-            'lesson'            => $newLesson,
+            'lesson'            => $newlesson,
             'method'            => 'update',
-            'registeredCourses' => empty( $student->courses ) ? Course::all() : $student->courses,
+            'registeredCourses' => $student->courses->isEmpty() ? Course::all() : $student->courses,
         ] );
     }
 
-    public function update( SaveLessonRequest $request, Student $student, Lesson $lesson )
-    {
+    public function update( SaveLessonRequest $request, Student $student, Lesson $lesson ) {
         $lesson->update( [
             'course_id'  => $request->get( 'course_id' ),
             'student_id' => $student->id,
@@ -65,7 +65,7 @@ class LessonsController extends Controller {
 
         $lessons           = $student->lessons()->paginate( 10 );
         $lesson            = new Lesson;
-        $registeredCourses = empty( $student->courses ) ? Course::all() : $student->courses;
+        $registeredCourses = $student->courses->isEmpty() ? Course::all() : $student->courses;
         $method            = 'store';
 
         return redirect()->route( 'lessons.index', compact( 'student', 'lessons', 'lesson', 'registeredCourses', 'method' ) );

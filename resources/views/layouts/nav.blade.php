@@ -18,12 +18,13 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                <li><a href="{{ route('students.index') }}">Students</a></li>
-                <li><a href="{{ route('courses.index') }}">Courses</a></li>
-            </ul>
-
-            <!-- Right Side Of Navbar -->
+            @if( Auth::check() )
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ route('students.index') }}">Students</a></li>
+                    <li><a href="{{ route('courses.index') }}">Courses</a></li>
+                </ul>
+        @endif
+        <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
