@@ -50,7 +50,7 @@
                 <td class="text-center">{{ $newlesson->formatted_paid }}</td>
                 <td class="notes">{{ $newlesson->notes }}</td>
                 <td class="text-right">
-                    <a href="{{ route( 'lessons.edit', $newlesson ) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route( 'lessons.edit', ['student'=>$student, 'lesson'=>$newlesson] ) }}" class="btn btn-warning">Edit</a>
                     <a href="{{ route( 'lessons.delete', $newlesson ) }}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
@@ -68,10 +68,10 @@
 
     <hr/>
     <h3>
-        Add a new lesson
+        {{ $lesson->exists ? 'Update lesson ('. $lesson->formatted_date .' | '. $lesson->formatted_time_from . ' - '. $lesson->formatted_time_to. ')' : 'Add a new lesson' }}
     </h3>
 
-    <form action="{{ route( 'lessons.store',  $student ) }}" method="POST">
+    <form action="{{ route( 'lessons.'.$method,  $student ) }}" method="POST">
         {{ csrf_field() }}
         @if( $lesson->exists )
             {{ method_field( 'PUT' ) }}
@@ -129,7 +129,7 @@
             <div class="col-xs-12 col-md-9">
                 <div class="form-group {{ $errors->has( 'price' ) ? 'has-error' : '' }}">
                     <label class="control-label" for="price">Price</label>
-                    <input type="text" class="form-control" id="price" name="price" placeholder="Price" value="{{ old( 'price', $lesson->price ) }}"/>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Price" value="{{ old( 'price', $lesson->formatted_price ) }}"/>
                     @if( $errors->has( 'price') )
                         <label for="email" class="control-label">{{ $errors->first( 'price' ) }}</label>
                     @endif
@@ -153,7 +153,7 @@
                 </div>
             </div>
         </div>
-        <input type="submit" value="Add new lesson" class="btn btn-success"/>
+        <input type="submit" value="{{ $lesson->exists ? 'Update lesson' : 'Add new lesson' }}" class="btn btn-success"/>
     </form>
 @endsection
 @push( 'scripts' )
