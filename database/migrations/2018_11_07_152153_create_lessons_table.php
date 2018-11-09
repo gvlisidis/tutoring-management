@@ -12,7 +12,8 @@ class CreateLessonsTable extends Migration {
             $table->integer( 'student_id' );
             $table->integer( 'course_id' );
             $table->date( 'date' )->nullable();
-            $table->time( 'time' )->nullable();
+            $table->time( 'time_from' )->nullable();
+            $table->time( 'time_to' )->nullable();
             $table->text( 'notes' )->nullable();
             $table->integer( 'price' )->nullable();
             $table->boolean( 'paid' )->default( false );

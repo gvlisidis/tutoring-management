@@ -20,7 +20,11 @@ class Student extends Model {
         return $this->hasMany( Lesson::class );
     }
 
-    public function totalAmount(){
-        return number_format($this->lessons->sum('price') / 10, 1) ;
+    public function totalAmount() {
+        return number_format( $this->lessons->sum( 'price' ) / 10, 1 );
+    }
+
+    public function calculatePaidLessons() {
+        return number_format( $this->lessons->where('paid', 1 )->sum( 'price' ) / 10, 1 );
     }
 }

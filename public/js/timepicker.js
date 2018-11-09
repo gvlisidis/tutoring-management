@@ -1,7 +1,6 @@
-$('.timepicker').timepicker({
-    maxHours: 24,
+$('.timepick').timepicker({
     minuteStep: 10,
-    defaultTime: '02:00 PM',
+    defaultTime: '13:00',
     autoclose: true,
     format: 'H:i'
 });

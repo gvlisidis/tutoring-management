@@ -12,10 +12,11 @@ class SaveLessonRequest extends FormRequest {
 
     public function rules() {
         return [
-            'date'  => 'required|date_format:d/m/Y',
-            'time'  => 'required',
-            'price' => 'numeric',
-            'paid'  => 'required',
+            'date'      => 'required|date_format:d/m/Y',
+            'time_from' => 'required',
+            'time_to'   => 'required',
+            'price'     => 'numeric',
+            'paid'      => 'required',
         ];
     }
 }

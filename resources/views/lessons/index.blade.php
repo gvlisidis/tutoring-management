@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{ $student->lessons->count() }}</td>
                     <td>&euro;{{ $student->totalAmount() }}</td>
-                    <td></td>
+                    <td>&euro;{{ $student->calculatePaidLessons() }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -31,10 +31,10 @@
         <thead>
         <tr>
             <th>Course</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Price(&euro;)</th>
-            <th>Paid</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Time from - Time to</th>
+            <th class="text-center">Price(&euro;)</th>
+            <th class="text-center">Paid</th>
             <th class="notes">Notes</th>
             <th></th>
         </tr>
@@ -44,10 +44,10 @@
         @forelse( $lessons as $newlesson )
             <tr class="record" data-type="archive">
                 <td>{{ $newlesson->course->name }}</td>
-                <td>{{ $newlesson->formatted_date }}</td>
-                <td>{{ $newlesson->formatted_time }}</td>
-                <td>&euro;{{ $newlesson->formatted_price }}</td>
-                <td>{{ $newlesson->formatted_paid }}</td>
+                <td class="text-center">{{ $newlesson->formatted_date }}</td>
+                <td class="text-center">{{ $newlesson->formatted_time_from }} - {{ $newlesson->formatted_time_to }}</td>
+                <td class="text-center">&euro;{{ $newlesson->formatted_price }}</td>
+                <td class="text-center">{{ $newlesson->formatted_paid }}</td>
                 <td class="notes">{{ $newlesson->notes }}</td>
                 <td class="text-right">
                     <a href="{{ route( 'lessons.edit', $newlesson ) }}" class="btn btn-warning">Edit</a>
@@ -78,7 +78,7 @@
         @endif
         <div class="row">
             <div class="col-xs-12 col-md-4">
-                <div class="form-group {{ $errors->has( 'date' ) ? 'has-error' : '' }}">
+                <div class="form-group">
                     <label class="control-label" for="date">Date</label>
                     <div class="input-group date datepicker">
                         <input type="text" class="form-control" id="date" name="date" placeholder="dd/mm/yyyy" value="{{ old( 'date', $lesson->formatted_date ) }}"/>
@@ -87,16 +87,24 @@
                         </div>
                     </div>
 
-                    @if( $errors->has( 'date') )
-                        <label for="date" class="control-label">{{ $errors->first( 'date' ) }}</label>
-                    @endif
                 </div>
             </div>
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-2">
                 <div class="form-group">
-                    <label class="control-label" for="time">Time</label>
-                    <div class="input-group date timepicker">
-                    <input type="text" class="form-control timepicker" id="time" name="time" placeholder="24:00" value="{{ old( 'time', $lesson->time ) }}"/>
+                    <label class="control-label" for="time_from">Time from</label>
+                    <div class="input-group bootstrap-timepicker timepicker">
+                    <input type="text" class="form-control timepick" id="time_from" name="time_from" placeholder="24:00" value="{{ old( 'time_from', $lesson->time_from ) }}"/>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-2">
+                <div class="form-group">
+                    <label class="control-label" for="time_to">Time to</label>
+                    <div class="input-group bootstrap-timepicker timepicker">
+                        <input type="text" class="form-control timepick" id="time_to" name="time_to" placeholder="24:00"  value="{{ old( 'time_to', $lesson->time_to ) }}"/>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </div>
@@ -141,7 +149,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="notes">Notes</label>
-                    <textarea class="form-control" id="notes" name="notes">{{ old( 'notes', $lesson->notes ) }}</textarea>
+                    <textarea class="form-control notes-area" id="notes" name="notes">{{ old( 'notes', $lesson->notes ) }}</textarea>
                 </div>
             </div>
         </div>

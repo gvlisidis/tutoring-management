@@ -35,17 +35,28 @@ class Lesson extends Model {
         return empty( $this->date ) ? '' : $this->date->format( 'd/m/Y' );
     }
 
-    public function setTimeAttribute( $time ) {
-        $this->attributes['time'] = Carbon::createFromFormat( 'H:i A', $time );
+    public function setTimeFromAttribute( $time ) {
+        $this->attributes['time_from'] = Carbon::createFromFormat( 'H:i A', $time );
     }
 
-    public function getFormattedTimeAttribute() {
+    public function getFormattedTimeFromAttribute() {
         if ( ! $this->exists ) {
             return '';
         }
 
-        return empty( $this->time ) ? '' : substr( $this->time, 0, 5 );
+        return empty( $this->time_from ) ? '' : substr( $this->time_from, 0, 5 );
+    }
 
+    public function setTimeToAttribute( $time ) {
+        $this->attributes['time_to'] = Carbon::createFromFormat( 'H:i A', $time );
+    }
+
+    public function getFormattedTimeToAttribute() {
+        if ( ! $this->exists ) {
+            return '';
+        }
+
+        return empty( $this->time_to ) ? '' : substr( $this->time_to, 0, 5 );
     }
 
     public function setPriceAttribute( $price ) {

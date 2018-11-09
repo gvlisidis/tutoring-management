@@ -6727,3 +6727,8 @@ button.close {
     max-width: 150px;
     word-wrap: break-word;
 }
+
+.notes-area {
+    resize: vertical;
+    max-height: 120px;
+}
