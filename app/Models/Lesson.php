@@ -35,6 +35,10 @@ class Lesson extends Model {
         return empty( $this->date ) ? '' : $this->date->format( 'd/m/Y' );
     }
 
+    public function isOverdue() {
+        return ( Carbon::now() > $this->date->addMonth( 1 ) && ! $this->paid );
+    }
+
     public function setTimeFromAttribute( $time ) {
         $this->attributes['time_from'] = Carbon::createFromFormat( 'H:i A', $time );
     }
@@ -70,6 +74,5 @@ class Lesson extends Model {
     public function getFormattedPaidAttribute() {
         return $this->getAttribute( 'paid' ) == 1 ? 'Yes' : 'No';
     }
-
 
 }

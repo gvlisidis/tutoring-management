@@ -6732,3 +6732,9 @@ button.close {
     resize: vertical;
     max-height: 120px;
 }
+
+.lessons-header{
+    background-color: #e0dede;
+    font-size:  16px;
+    color: #000000;
+}

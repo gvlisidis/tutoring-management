@@ -3,37 +3,55 @@
 @section('title')
     Lessons history for {{ $student->name }}
 @endsection
-@section('controls')
-    <div class="summary" style="width: 500px; font-size: 14px;">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Summary</h3>
+
+@section('index')
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="personal-info" style="width: 500px; font-size: 14px;">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Student information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>Name:</strong> <span>{{ $student->name }}</span></p>
+                        <p><strong>Email:</strong> <span>{{ $student->email }}</span></p>
+                        <p><strong>Adderess: </strong><span>{{ $student->address }}</span></p>
+                        <p><strong>Telephone:</strong> <span>{{ $student->telephone }}</span></p>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td class="text-center">Number of lessons</td>
-                        <td class="text-center">Amount</td>
-                        <td class="text-center">Paid amount</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-center">{{ $student->lessons->count() }}</td>
-                        <td class="text-center">&euro;{{ $student->totalAmount() }}</td>
-                        <td class="text-center">&euro;{{ $student->calculatePaidLessons() }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="summary pull-right" style="width: 500px; font-size: 14px;">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Lessons summary</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td class="text-center">Number of lessons</td>
+                                <td class="text-center">Amount</td>
+                                <td class="text-center">Paid amount</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center">{{ $student->lessons->count() }}</td>
+                                <td class="text-center">&euro;{{ $student->totalAmount() }}</td>
+                                <td class="text-center">&euro;{{ $student->calculatePaidLessons() }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-@endsection
-@section('index')
     <br/>
-    <table class="table table-bordered table-hover">
-        <thead>
+    <table class="table table-bordered table-hover lessons-table">
+        <thead class="lessons-header">
         <tr>
             <th>Course</th>
             <th class="text-center">Date</th>
@@ -47,7 +65,7 @@
         <tbody>
 
         @forelse( $lessons as $newlesson )
-            <tr class="record" data-type="archive">
+            <tr style="background-color: {{ $newlesson->isOverdue() ? '#ef928d' : ''  }}">
                 <td>{{ $newlesson->course->name }}</td>
                 <td class="text-center">{{ $newlesson->formatted_date }}</td>
                 <td class="text-center">{{ $newlesson->formatted_time_from }} - {{ $newlesson->formatted_time_to }}</td>
