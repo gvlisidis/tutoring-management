@@ -11,11 +11,6 @@ class CreateCourseStudentTable extends Migration {
             $table->increments( 'id' );
             $table->integer( 'course_id' )->unsigned();
             $table->integer( 'student_id' )->unsigned();
-            /*$table->date( 'date' )->nullable();
-            $table->time( 'time' )->nullable();
-            $table->text( 'notes' )->nullable();
-            $table->integer( 'price' )->nullable();
-            $table->boolean( 'paid' )->default( false );*/
             $table->timestamps();
         } );
     }

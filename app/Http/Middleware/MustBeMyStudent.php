@@ -9,6 +9,7 @@ class MustBeMyStudent {
 
     public function handle( $request, Closure $next ) {
         $student = $request->route( 'student' );
+
         $check   = Student::where( 'id', $student->id )->where( 'user_id', auth()->user()->id )->first();
 
         if ( $check ) {

@@ -76,10 +76,23 @@ class StudentsController extends Controller {
         return redirect()->route( 'students.index' )->with( 'success', 'Student updated successfully.' );
     }
 
+    public function archive() {
+        return view( 'students.archived', [
+            'archived_students' => Student::onlyTrashed()->where('user_id', auth()->user()->id )->get(),
+        ] );
+    }
+
+    public function restore(  $id ) {
+        Student::onlyTrashed()->findOrFail($id)->restore();
+
+        return redirect()->back()->with( 'success', 'Student has been restored successfully!' );
+    }
+
+
     public function destroy( Student $student ) {
         $student->delete();
 
-        return redirect()->back()->with( 'success', 'Student deleted successfully.' );
+        return redirect()->route('students.index')->with( 'success', 'Student has been archived successfully.' );
     }
 
 }

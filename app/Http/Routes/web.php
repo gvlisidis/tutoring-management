@@ -6,11 +6,13 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     Route::get( '', 'UsersController@students' )->name( 'students.index' );
 
     Route::group( [ 'prefix' => 'students' ], function () {
+        Route::get( 'archive', 'StudentsController@archive' )->name( 'students.archive' );
         Route::get( '{student}/edit', 'StudentsController@edit' )->name( 'students.edit' )->middleware( 'mystudent' );
         Route::put( '{student}', 'StudentsController@update' )->name( 'students.update' )->middleware( 'mystudent' );
         Route::get( 'create', 'StudentsController@create' )->name( 'students.create' );
         Route::post( '', 'StudentsController@store' )->name( 'students.store' );
-        Route::get( '{student}/delete', 'StudentsController@destroy' )->name( 'students.delete' )->middleware( 'mystudent' );
+        Route::put( '{id}/restore', 'StudentsController@restore' )->name( 'students.restore' );
+        Route::get( '{student}/delete', 'StudentsController@destroy' )->name( 'students.archive-student' )->middleware( 'mystudent' );
     } );
 
     Route::group( [ 'prefix' => 'my-account' ], function () {

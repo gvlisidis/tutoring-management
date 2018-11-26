@@ -1,9 +1,10 @@
 @extends('crud.index')
 
-@section('title', 'My students')
+@section('title', 'My active students')
 
 @section('controls')
-    <a href="{{ route( 'students.create' ) }}" class="btn btn-success pull-right">Add a new student</a>
+    <a href="{{ route( 'students.create' ) }}" class="btn btn-success">Add a new student</a>
+    <a href="{{ route( 'students.archive' ) }}" class="btn btn-primary">Archive</a>
 @endsection
 
 @section('index')
@@ -21,7 +22,7 @@
         <tbody>
         @forelse( $students as $student )
             <tr class="record" data-type="archive">
-                <td>{{ $student->name }}</td>
+                <td class="name">{{ $student->name }}</td>
                 <td>{{ $student->lastname }}</td>
                 <td>{{ $student->email }}</td>
                 <td>{{ $student->telephone }}</td>
@@ -29,7 +30,7 @@
                 <td class="text-right">
                     <a href="{{ route('lessons.index', $student) }}" class="btn btn-primary">Lessons</a>
                     <a href="{{ route( 'students.edit', $student ) }}" class="btn btn-warning">Edit</a>
-                    <a href="{{ route( 'students.delete', $student ) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ route( 'students.archive-student', $student ) }}" class="btn btn-danger archive">Archive</a>
                 </td>
             </tr>
         @empty

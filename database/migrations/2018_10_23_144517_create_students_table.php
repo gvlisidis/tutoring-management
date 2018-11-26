@@ -16,6 +16,7 @@ class CreateStudentsTable extends Migration {
             $table->integer( 'user_id' );
             $table->string( 'email' )->unique();
             $table->timestamps();
+            $table->softDeletes();
         } );
     }
 
