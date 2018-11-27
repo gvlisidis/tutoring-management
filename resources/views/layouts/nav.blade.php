@@ -22,6 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('students.index') }}">Students</a></li>
                     <li><a href="{{ route('courses.index') }}">Courses</a></li>
+                    <li><a href="{{ route('my-stats') }}">Statistics</a></li>
                 </ul>
         @endif
         <!-- Right Side Of Navbar -->

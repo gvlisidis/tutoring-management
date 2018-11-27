@@ -4,6 +4,7 @@ Auth::routes();
 
 Route::group( [ 'middleware' => 'auth' ], function () {
     Route::get( '', 'UsersController@students' )->name( 'students.index' );
+    Route::get( 'my-stats', 'UsersController@myStats' )->name( 'my-stats' );
 
     Route::group( [ 'prefix' => 'students' ], function () {
         Route::get( 'archive', 'StudentsController@archive' )->name( 'students.archive' );

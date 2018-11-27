@@ -28,7 +28,7 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-5">
             <div class="form-group {{ $errors->has( 'name' ) ? 'has-error' : '' }}">
                 <label class="control-label" for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ old( 'name', $student->name ) }}"/>
@@ -37,9 +37,7 @@
                 @endif
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-5">
             <div class="form-group {{ $errors->has( 'lastname' ) ? 'has-error' : '' }}">
                 <label class="control-label" for="lastname">Last name</label>
                 <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="{{ old( 'lastname', $student->lastname ) }}"/>
@@ -48,7 +46,17 @@
                 @endif
             </div>
         </div>
+        <div class="col-xs-12 col-md-2">
+            <div class="form-group">
+                <label class="control-label" for="gender">Gender</label>
+                <select class="form-control" name="gender">
+                    <option value="1" {{ old('gender') == 1 ? 'selected' : '' }}>Male</option>
+                    <option value="2" {{ old('gender') == 2 ? 'selected' : '' }}>Female</option>
+                </select>
+            </div>
+        </div>
     </div>
+
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group {{ $errors->has( 'email' ) ? 'has-error' : '' }}">

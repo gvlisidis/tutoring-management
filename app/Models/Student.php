@@ -26,10 +26,14 @@ class Student extends Model {
     }
 
     public function totalAmount() {
-        return number_format( $this->lessons->sum( 'price' ) / 10, 1 );
+        return number_format( $this->lessons->sum( 'price' ) / 100, 1 );
     }
 
     public function calculatePaidLessons() {
-        return number_format( $this->lessons->where('paid', 1 )->sum( 'price' ) / 10, 1 );
+        return number_format( $this->lessons->where('paid', 1 )->sum( 'price' ) / 100, 1 );
+    }
+
+    public function genderName(){
+        return $this->gender == 1 ? 'Male' : 'Female';
     }
 }

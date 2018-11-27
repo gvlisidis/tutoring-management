@@ -6738,3 +6738,12 @@ button.close {
     font-size:  16px;
     color: #000000;
 }
+
+#gender, #course-popularity, #per-class{
+    width: 400px !important;
+    height: 400px !important;
+}
+
+.canvasjs-chart-credit{
+    visibility: hidden;
+}

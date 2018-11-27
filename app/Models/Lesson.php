@@ -68,7 +68,7 @@ class Lesson extends Model {
     }
 
     public function getFormattedPriceAttribute() {
-        return number_format( $this->getAttribute( 'price' ) / 10, 1 );
+        return number_format( $this->getAttribute( 'price' ) / 100, 1 );
     }
 
     public function getFormattedPaidAttribute() {

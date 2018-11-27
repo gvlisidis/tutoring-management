@@ -10,6 +10,7 @@ $factory->define( Student::class, function ( Faker\Generator $faker ) {
         'name'      => $faker->name,
         'lastname'  => $faker->lastName,
         'telephone' => $faker->phoneNumber,
+        'gender'    => rand( 1, 2 ),
         'address'   => $faker->address,
         'user_id'   => rand( 1, 8 ),
         'email'     => $faker->email,
