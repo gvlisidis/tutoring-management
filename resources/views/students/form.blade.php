@@ -50,8 +50,8 @@
             <div class="form-group">
                 <label class="control-label" for="gender">Gender</label>
                 <select class="form-control" name="gender">
-                    <option value="1" {{ old('gender') == 1 ? 'selected' : '' }}>Male</option>
-                    <option value="2" {{ old('gender') == 2 ? 'selected' : '' }}>Female</option>
+                    <option value="male" {{ old('gender', $student->gender ) === 'male' ? 'selected' : '' }}>Male</option>
+                    <option value="female" {{ old('gender', $student->gender) === 'female' ? 'selected' : '' }}>Female</option>
                 </select>
             </div>
         </div>

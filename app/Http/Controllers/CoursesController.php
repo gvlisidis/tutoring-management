@@ -23,6 +23,7 @@ class CoursesController extends Controller {
     public function update( SaveCourseRequest $request, Course $course ) {
         $course->update( [
             'name'    => $request->get( 'name' ),
+            'year'    => $request->get( 'year' ),
             'user_id' => auth()->id(),
         ] );
 
@@ -39,6 +40,7 @@ class CoursesController extends Controller {
     public function store( SaveCourseRequest $request, Course $course ) {
         $course->create( [
             'name'    => $request->get( 'name' ),
+            'year'    => $request->get( 'year' ),
             'user_id' => auth()->id(),
         ] );
 

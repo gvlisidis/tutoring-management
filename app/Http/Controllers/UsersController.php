@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Course;
+use App\Services\StatisticDataService;
 
 class UsersController extends Controller {
 
@@ -32,34 +33,22 @@ class UsersController extends Controller {
         return redirect()->route( 'students.index' )->with( 'success', 'Your account has been updated successfully!' );
     }
 
-    public function myStats() {
+    public function myStats( StatisticDataService $service) {
         $students = auth()->user()->students;
-        $courses       = Course::all();
+        $courses  = Course::all();
 
         // Students by gender graph
         $numOfStudents = $students->count();
-        $numOfBoys     = $students->where( 'gender', 1 )->count();
+        $numOfBoys     = $students->where( 'gender', '==', 'male' )->count();
         $numOfGirls    = $numOfStudents - $numOfBoys;
 
-
         // Students per class graph
-        $year            = collect();
-        $studentsPerYear = $courses->groupBy( 'year' );
-        foreach ( $studentsPerYear as $id => $numcourses ) {
-            $temp = collect();
-            $numcourses->each( function ( $course ) use ( $temp ) {
-                $temp->push( $course->students->where('user_id', auth()->id() )->count() );
-            } );
-            $year->push( [ 'year' => $id, 'number' => $temp->sum() ] );
-        }
+        $year = $service->studendsPerYearClass( $courses );
 
         //  Course popularity graph
-        $coursePopularity = collect();
-        foreach ( $courses as $course ) {
-            $coursePopularity->push( [ 'name' => $course->name, 'students' => $course->students->where('user_id', auth()->id() )->count() ] );
-        }
-       // dd($coursePopularity);
+        $coursePopularity = $service->coursePopularity( $courses );
 
         return view( 'user.mystats', compact( 'numOfBoys', 'numOfGirls', 'coursePopularity', 'year' ) );
     }
+
 }

@@ -33,7 +33,4 @@ class Student extends Model {
         return number_format( $this->lessons->where('paid', 1 )->sum( 'price' ) / 100, 1 );
     }
 
-    public function genderName(){
-        return $this->gender == 1 ? 'Male' : 'Female';
-    }
 }

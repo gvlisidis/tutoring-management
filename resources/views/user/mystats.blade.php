@@ -24,13 +24,24 @@
             data: [
                 {
                     type: "pie",
+                    indexLabelPlacement: "inside",
+                    toolTipContent: "<b>{label}</b>: {y} <b>({percentage}%)</b>",
+                    indexLabel: "{label} ({y}%)",
+                    indexLabelFontSize: 21,
                     dataPoints: [
-                        { label: "Boys", y: {{ $numOfBoys }}  },
-                        { label: "Girls", y: {{ $numOfGirls }}  }
+                        @if($numOfBoys)
+                        {
+                            label: "Boys", y: {{ $numOfBoys }}  },
+                        @endif
+                        @if($numOfGirls)
+                        {
+                            label: "Girls", y: {{ $numOfGirls }}  }
+                        @endif
                     ]
                 }
             ]
         } );
+
         chart1.render();
 
         var chart2 = new CanvasJS.Chart( "course-popularity", {
@@ -40,13 +51,19 @@
             data: [
                 {
                     type: "pie",
+                    indexLabelPlacement: "inside",
+                    toolTipContent: "{y} - #percent %",
+                    indexLabel: "{label} ({y}%)",
+                    indexLabelFontSize: 11,
                     dataPoints: [
+
                             @foreach($coursePopularity as $course)
+                            @if($course['students'])
                         {
                             label: '{{ $course['name'] }}', y: {{ $course['students'] }}
                         },
+                        @endif
                         @endforeach
-
                     ]
                 }
             ]
@@ -60,11 +77,17 @@
             data: [
                 {
                     type: "pie",
+                    indexLabelPlacement: "inside",
+                    toolTipContent: "{y} - #percent %",
+                    indexLabel: "{label} ({y}%)",
+                    indexLabelFontSize: 22,
                     dataPoints: [
                             @foreach($year as $course)
+                            @if($course['number'])
                         {
                             label: '{{ $course['year'] }}', y: {{ $course['number'] }}
                         },
+                        @endif
                         @endforeach
 
                     ]
@@ -73,33 +96,4 @@
         } );
         chart3.render();
     };
-
-
-
 </script>
-{{--
-<script type="text/javascript">
-
-    window.onload = function () {
-        var chart2 = new CanvasJS.Chart( "course-popularity", {
-            title: {
-                text: "Course popularity"
-            },
-            data: [
-                {
-                    type: "pie",
-                    dataPoints: [
-                            @foreach($coursePopularity as $course)
-                        {
-                            label: '{{ $course['name'] }}', y: {{ $course['students'] }}
-                        },
-                        @endforeach
-
-                    ]
-                }
-            ]
-        } );
-        chart2.render();
-    };
-</script>
---}}

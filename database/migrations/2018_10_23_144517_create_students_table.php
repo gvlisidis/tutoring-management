@@ -13,7 +13,7 @@ class CreateStudentsTable extends Migration {
             $table->string( 'lastname' );
             $table->string( 'telephone' )->nullable();
             $table->string( 'address' );
-            $table->integer( 'gender' );
+            $table->string( 'gender' );
             $table->integer( 'user_id' );
             $table->string( 'email' )->unique();
             $table->timestamps();

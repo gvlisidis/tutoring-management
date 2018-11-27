@@ -25,6 +25,7 @@ class SaveCourseRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
+            'year' => 'required',
         ];
     }
 }
