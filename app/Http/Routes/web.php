@@ -36,7 +36,7 @@ Route::group( [ 'middleware' => 'auth' ], function () {
         Route::put( 'student/{student}/lesson/{lesson}', 'LessonsController@update' )->name( 'lessons.update' );
        // Route::get( '{student}/create', 'LessonsController@create' )->name( 'lessons.create' );
         Route::post( 'student/{student}', 'LessonsController@store' )->name( 'lessons.store' );
-        Route::get( '{newlesson}/delete', 'LessonsController@destroy' )->name( 'lessons.delete' );
+        Route::get( 'student/{student}/lesson/{newlesson}/delete', 'LessonsController@destroy' )->name( 'lessons.delete' );
     } );
 
 } );

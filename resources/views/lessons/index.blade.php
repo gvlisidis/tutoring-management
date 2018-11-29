@@ -74,7 +74,7 @@
                 <td class="notes">{{ $newlesson->notes }}</td>
                 <td class="text-right">
                     <a href="{{ route( 'lessons.edit', ['student'=>$student, 'lesson'=>$newlesson] ) }}" class="btn btn-warning">Edit</a>
-                    <a href="{{ route( 'lessons.delete', $newlesson ) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ route( 'lessons.delete', ['student'=>$student, 'lesson'=>$newlesson] ) }}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         @empty

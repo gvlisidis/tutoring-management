@@ -70,4 +70,10 @@ class LessonsController extends Controller {
 
         return redirect()->route( 'lessons.index', compact( 'student', 'lessons', 'lesson', 'registeredCourses', 'method' ) );
     }
+
+    public function destroy( Student $student, Lesson $newlesson ) {
+        $newlesson->delete();
+
+        return redirect()->route( 'lessons.index', compact( 'student' ) )->with( 'success', 'Lesson has been deleted successfully.' );
+    }
 }
