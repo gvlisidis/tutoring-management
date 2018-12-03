@@ -13,6 +13,11 @@
                 <div id="per-class" class="pull-left"></div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div id="per-year"></div>
+            </div>
+        </div>
     </div>
 @endsection
 <script type="text/javascript">
@@ -78,8 +83,8 @@
                 {
                     type: "pie",
                     indexLabelPlacement: "inside",
-                    toolTipContent: "{y} - #percent %",
-                    indexLabel: "{label} ({y}%)",
+                    toolTipContent: "{y}",
+                    indexLabel: "{y}",
                     indexLabelFontSize: 22,
                     dataPoints: [
                             @foreach($year as $course)
@@ -95,5 +100,30 @@
             ]
         } );
         chart3.render();
+
+        var chart4 = new CanvasJS.Chart( "per-year", {
+            title: {
+                text: "Class popularity"
+            },
+            data: [
+                {
+                    type: "column",
+                    indexLabelPlacement: "outside",
+                    indexLabel: "{y}",
+                    indexLabelFontSize: 22,
+                    dataPoints: [
+                            @foreach($studentsPerYear as $course)
+
+                        {
+                            label: '{{ $course['year'] }}', y: {{ $course['numOfStudents'] }}
+                        },
+
+                        @endforeach
+
+                    ]
+                }
+            ]
+        } );
+        chart4.render();
     };
 </script>

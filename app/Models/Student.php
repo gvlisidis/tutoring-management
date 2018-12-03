@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -32,5 +33,19 @@ class Student extends Model {
     public function calculatePaidLessons() {
         return number_format( $this->lessons->where('paid', 1 )->sum( 'price' ) / 100, 1 );
     }
+
+    public function setCreatedAtAttribute( $date ) {
+        $this->attributes['created_at'] = Carbon::createFromFormat( 'd/m/Y', $date );
+    }
+
+    public function getFormattedCreatedAtAttribute() {
+        if ( ! $this->exists ) {
+            return '';
+        }
+
+        return empty( $this->created_at ) ? '' : $this->created_at->format( 'd/m/Y' );
+    }
+
+
 
 }

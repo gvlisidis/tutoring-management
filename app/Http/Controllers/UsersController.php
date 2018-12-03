@@ -48,7 +48,10 @@ class UsersController extends Controller {
         //  Course popularity graph
         $coursePopularity = $service->coursePopularity( $courses );
 
-        return view( 'user.mystats', compact( 'numOfBoys', 'numOfGirls', 'coursePopularity', 'year' ) );
+        //studentsPerYear
+        $studentsPerYear = $service->studentsPerYear();
+
+        return view( 'user.mystats', compact( 'numOfBoys', 'numOfGirls', 'coursePopularity', 'year', 'studentsPerYear' ) );
     }
 
 }

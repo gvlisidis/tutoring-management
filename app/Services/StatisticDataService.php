@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Services;
+
+use Carbon\Carbon;
 
 class StatisticDataService {
 
@@ -24,5 +27,22 @@ class StatisticDataService {
         }
 
         return $year;
+    }
+
+    public function studentsPerYear( ) {
+        $students = auth()->user()->students();
+
+        $startYear = $students->first()->created_at->year;
+        // dd(Carbon::now()->year);
+        $mystudents = collect();
+
+        for ( $i = $startYear; $i <= Carbon::now()->year; $i++ ) {
+            $students = auth()->user()->students();
+            $numOfStudents = $students->whereYear( 'created_at', '=', $i )->count();
+            $mystudents->push( [ 'year' => $i, 'numOfStudents' => $numOfStudents ] );
+        }
+
+        return $mystudents;
+
     }
 }
